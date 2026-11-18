@@ -1,0 +1,154 @@
+{
+  "regime": "scratch",
+  "seed": 1,
+  "settings": {
+    "model": "torchvision.models.resnet18",
+    "weights": null,
+    "fc": {
+      "in_features": 512,
+      "out_features": 6,
+      "bias": true,
+      "init": "Linear defaults"
+    },
+    "eval_modules_during_train": [],
+    "parameters": {
+      "total": 11179590,
+      "trainable": 11179590,
+      "groups": [
+        {
+          "name": "all",
+          "lr": 0.003,
+          "count": 11179590
+        }
+      ]
+    },
+    "optimizer": {
+      "name": "AdamW",
+      "lr": 0.001,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001,
+      "amsgrad": false,
+      "foreach": null,
+      "maximize": false,
+      "capturable": false,
+      "differentiable": false,
+      "fused": null
+    },
+    "batch_norm": {
+      "eps": 1e-05,
+      "momentum": 0.1,
+      "affine": true,
+      "track_running_stats": true
+    },
+    "loss": {
+      "name": "CrossEntropyLoss",
+      "reduction": "mean",
+      "weight": null,
+      "ignore_index": -100,
+      "label_smoothing": 0.0
+    },
+    "dtype": "float32",
+    "transforms": {
+      "rgb": true,
+      "train": "Compose(\n    RandomResizedCrop(size=(160, 160), scale=(0.7, 1.0), ratio=(0.75, 1.3333), interpolation=bilinear, antialias=True)\n    RandomHorizontalFlip(p=0.5)\n    ToTensor()\n    Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))\n)",
+      "validation": "Compose(\n    Resize(size=(160, 160), interpolation=bilinear, max_size=None, antialias=True)\n    ToTensor()\n    Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))\n)",
+      "test": "Compose(\n    Resize(size=(160, 160), interpolation=bilinear, max_size=None, antialias=True)\n    ToTensor()\n    Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))\n)"
+    },
+    "loaders": {
+      "train": {
+        "batch_size": 32,
+        "shuffle": true
+      },
+      "validation": {
+        "batch_size": 64,
+        "shuffle": false
+      },
+      "test": {
+        "batch_size": 64,
+        "shuffle": false
+      },
+      "common": {
+        "drop_last": false,
+        "num_workers": 0,
+        "pin_memory": false,
+        "generator": null,
+        "custom_sampler": null,
+        "timeout": 0,
+        "persistent_workers": false,
+        "prefetch_factor": null
+      }
+    },
+    "epochs": 8,
+    "steps_per_epoch": 38,
+    "last_train_batch_size": 16,
+    "selection_epoch": 8,
+    "validation": "eval + no_grad; argmax, macro-F1 over 6 classes",
+    "lr_scheduler": null,
+    "gradient_clipping": null,
+    "amp": false,
+    "early_stopping": false,
+    "cpu_threads": 4
+  },
+  "git": {
+    "commit": "4b8ff5dbe364a5756be073ac2c3b7f973425012c",
+    "dirty": true
+  },
+  "split_sha256": "148dad92de9a18670c177df9f8757aa6519fb0ea6d74a8ba723cfc4453f0a1bc",
+  "weights_sha256": "b675d195bd70234f4c31ff9d65a1a7304e6e1cce4b02642fd7a50e779b5dfe0e",
+  "versions": {
+    "python": "3.12.2",
+    "torch": "2.5.1+cu121",
+    "torchvision": "0.20.1+cu121",
+    "numpy": "2.1.3"
+  },
+  "device": "cuda",
+  "device_name": "NVIDIA GeForce GTX 1080 Ti",
+  "epochs": [
+    {
+      "epoch": 1,
+      "train_loss": 1.5967767333984375,
+      "validation_f1": 0.42814890165079394
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.2046197509765626,
+      "validation_f1": 0.3873251049821478
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.2014988199869792,
+      "validation_f1": 0.4152762435419323
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.1174634806315105,
+      "validation_f1": 0.5477331943411748
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.0852994791666666,
+      "validation_f1": 0.5248540778258054
+    },
+    {
+      "epoch": 6,
+      "train_loss": 1.045381062825521,
+      "validation_f1": 0.5438375996376323
+    },
+    {
+      "epoch": 7,
+      "train_loss": 1.0177410888671874,
+      "validation_f1": 0.6243241585529875
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.9652090454101563,
+      "validation_f1": 0.4996242256307914
+    }
+  ],
+  "optimizer_steps": 304,
+  "seconds": 163.77551429999585
+}

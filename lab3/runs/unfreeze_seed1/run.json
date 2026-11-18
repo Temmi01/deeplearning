@@ -1,0 +1,165 @@
+{
+  "regime": "unfreeze",
+  "seed": 1,
+  "settings": {
+    "model": "torchvision.models.resnet18",
+    "weights": "IMAGENET1K_V1",
+    "fc": {
+      "in_features": 512,
+      "out_features": 6,
+      "bias": true,
+      "init": "Linear defaults"
+    },
+    "eval_modules_during_train": [
+      "conv1",
+      "bn1",
+      "layer1",
+      "layer2",
+      "layer3"
+    ],
+    "parameters": {
+      "total": 11179590,
+      "trainable": 8396806,
+      "groups": [
+        {
+          "name": "fc",
+          "lr": 0.003,
+          "count": 3078
+        },
+        {
+          "name": "layer4",
+          "lr": 0.0003,
+          "count": 8393728
+        }
+      ]
+    },
+    "optimizer": {
+      "name": "AdamW",
+      "lr": 0.001,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.0001,
+      "amsgrad": false,
+      "foreach": null,
+      "maximize": false,
+      "capturable": false,
+      "differentiable": false,
+      "fused": null
+    },
+    "batch_norm": {
+      "eps": 1e-05,
+      "momentum": 0.1,
+      "affine": true,
+      "track_running_stats": true
+    },
+    "loss": {
+      "name": "CrossEntropyLoss",
+      "reduction": "mean",
+      "weight": null,
+      "ignore_index": -100,
+      "label_smoothing": 0.0
+    },
+    "dtype": "float32",
+    "transforms": {
+      "rgb": true,
+      "train": "Compose(\n    RandomResizedCrop(size=(160, 160), scale=(0.7, 1.0), ratio=(0.75, 1.3333), interpolation=bilinear, antialias=True)\n    RandomHorizontalFlip(p=0.5)\n    ToTensor()\n    Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))\n)",
+      "validation": "Compose(\n    Resize(size=(160, 160), interpolation=bilinear, max_size=None, antialias=True)\n    ToTensor()\n    Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))\n)",
+      "test": "Compose(\n    Resize(size=(160, 160), interpolation=bilinear, max_size=None, antialias=True)\n    ToTensor()\n    Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))\n)"
+    },
+    "loaders": {
+      "train": {
+        "batch_size": 32,
+        "shuffle": true
+      },
+      "validation": {
+        "batch_size": 64,
+        "shuffle": false
+      },
+      "test": {
+        "batch_size": 64,
+        "shuffle": false
+      },
+      "common": {
+        "drop_last": false,
+        "num_workers": 0,
+        "pin_memory": false,
+        "generator": null,
+        "custom_sampler": null,
+        "timeout": 0,
+        "persistent_workers": false,
+        "prefetch_factor": null
+      }
+    },
+    "epochs": 8,
+    "steps_per_epoch": 38,
+    "last_train_batch_size": 16,
+    "selection_epoch": 8,
+    "validation": "eval + no_grad; argmax, macro-F1 over 6 classes",
+    "lr_scheduler": null,
+    "gradient_clipping": null,
+    "amp": false,
+    "early_stopping": false,
+    "cpu_threads": 4
+  },
+  "git": {
+    "commit": "4b8ff5dbe364a5756be073ac2c3b7f973425012c",
+    "dirty": true
+  },
+  "split_sha256": "148dad92de9a18670c177df9f8757aa6519fb0ea6d74a8ba723cfc4453f0a1bc",
+  "weights_sha256": "48e19dd9b3016640c73d362d11e7a23f90813ffaa34ae36921eda5e8700ecc4b",
+  "versions": {
+    "python": "3.12.2",
+    "torch": "2.5.1+cu121",
+    "torchvision": "0.20.1+cu121",
+    "numpy": "2.1.3"
+  },
+  "device": "cuda",
+  "device_name": "NVIDIA GeForce GTX 1080 Ti",
+  "epochs": [
+    {
+      "epoch": 1,
+      "train_loss": 0.5433862813313802,
+      "validation_f1": 0.8970515588925753
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.1937555440266927,
+      "validation_f1": 0.8913168553080936
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.11537701924641927,
+      "validation_f1": 0.8718221067280978
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.09078360239664714,
+      "validation_f1": 0.8979713272720092
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.052280124028523764,
+      "validation_f1": 0.8941700878226531
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.07611663182576497,
+      "validation_f1": 0.8942273727716034
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.0670171610514323,
+      "validation_f1": 0.8938844371933924
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.06243495305379232,
+      "validation_f1": 0.8682934597793147
+    }
+  ],
+  "optimizer_steps": 304,
+  "seconds": 37.709582699993916
+}
